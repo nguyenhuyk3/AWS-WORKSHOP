@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.128.1">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Building a Testing Framework for Event-Driven Workflows :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1753537345" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1753537345" rel="stylesheet">
+    <link href="/css/hybrid.css?1753537345" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1753537345" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1753537345" rel="stylesheet">
+    <link href="/css/auto-complete.css?1753537345" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1753537345" rel="stylesheet">
+    <link href="/css/theme.css?1753537345" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1753537345" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1753537345" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1753537345"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/10-building-a-testing-framework-for-event-driven-workflows/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1753537345"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1753537345"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1753537345"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-creating-networking-resource-aws/" title="Tạo tài nguyên mạng AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-creating-networking-resource-aws/">
+           <b> 1 </b> Tạo tài nguyên mạng AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-creating-first-applications-at-ps/" title="Xây dựng các ứng dụng đầu tiên ở Public Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-creating-first-applications-at-ps/">
+           <b> 2 </b> Xây dựng các ứng dụng đầu tiên ở Public Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-creating-database-at-pds/" title="Tạo các database ở Private Database Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-creating-database-at-pds/">
+           <b> 3 </b> Tạo các database ở Private Database Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-creating-resources-at-pms/" title="Tạo các tài nguyên ở Private Middleware Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-creating-resources-at-pms/">
+           <b> 4 </b> Tạo các tài nguyên ở Private Middleware Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-creating-resources-at-pas/" title="Tạo các tài nguyên ở Private Application Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-creating-resources-at-pas/">
+           <b> 5 </b> Tạo các tài nguyên ở Private Application Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-routing-api-with-kong-gateway/" title="Routing API với Kong Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-routing-api-with-kong-gateway/">
+           <b> 6 </b> Routing API với Kong Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-setting-up-monitoring-and-logging-with-cloudwatch/" title="Giám sát và khả năng quan sát với Amazon CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-setting-up-monitoring-and-logging-with-cloudwatch/">
+           <b> 8 </b> Giám sát và khả năng quan sát với Amazon CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-perform-apis-of-backend-applications/" title="Thực hiện các API của các ứng dụng Backend" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-perform-apis-of-backend-applications/">
+           <b> 7 </b> Thực hiện các API của các ứng dụng Backend
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-optimizing-for-cost-and-performance/" title="Optimizing for Cost and Performance in Event Flows" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-optimizing-for-cost-and-performance/">
+           <b> 8. </b> Optimizing for Cost and Performance in Event Flows
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-building-a-testing-framework-for-event-driven-workflows/" title="Building a Testing Framework for Event-Driven Workflows" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/10-building-a-testing-framework-for-event-driven-workflows/">
+           <b> 10. </b> Building a Testing Framework for Event-Driven Workflows
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/10-building-a-testing-framework-for-event-driven-workflows/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/10-building-a-testing-framework-for-event-driven-workflows/">Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Event-Driven Architecture with SNS, SQS, S3, API Gateway and Lambda</a> > Building a Testing Framework for Event-Driven Workflows
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#goal">Goal</a></li>
+    <li><a href="#what-is-an-event-driven-architecture">What is an Event-Driven Architecture?</a></li>
+    <li><a href="#testing-layers">Testing Layers</a>
+      <ul>
+        <li><a href="#1-unit-testing-lambda-logic">1. Unit Testing (Lambda Logic)</a></li>
+        <li><a href="#2-integration-testing-service-to-service">2. Integration Testing (Service-to-Service)</a></li>
+        <li><a href="#3-end-to-end-testing-full-message-flow">3. End-to-End Testing (Full Message Flow)</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-to-test">What to Test</a></li>
+    <li><a href="#tools-you-can-use">Tools You Can Use</a></li>
+    <li><a href="#optional-automate-your-tests">Optional: Automate Your Tests</a></li>
+    <li><a href="#success-criteria">Success Criteria</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Building a Testing Framework for Event-Driven Workflows
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="goal">Goal</h2>
+<p>Establish a comprehensive testing strategy to ensure your event-driven architecture is:</p>
+<ul>
+<li><strong>Functionally correct</strong>: Each component behaves according to its specification</li>
+<li><strong>Resilient to failure</strong>: Systems recover gracefully from runtime issues or network faults</li>
+<li><strong>Scalable under load</strong>: Message throughput and Lambda execution scale with demand</li>
+<li><strong>Consistent with guarantees</strong>: Ordering, deduplication, and retry behaviors are preserved</li>
+</ul>
+<p>Testing such systems involves simulating real-world data flows, validating message delivery chains, observing failure responses, and confirming monitoring visibility.</p>
+<hr>
+<h2 id="what-is-an-event-driven-architecture">What is an Event-Driven Architecture?</h2>
+<p>An event-driven architecture (EDA) is built around the generation, propagation, and handling of discrete messages (events) across loosely coupled services. It typically involves:</p>
+<ul>
+<li><strong>Producers</strong> that emit events (e.g., API Gateway, S3, user actions)</li>
+<li><strong>Messaging middleware</strong> such as SNS and SQS to route or buffer events</li>
+<li><strong>Consumers</strong> like Lambda functions that respond to those events</li>
+</ul>
+<p>Ensuring that these asynchronous flows work correctly under real-world conditions requires testing at multiple levels.</p>
+<hr>
+<h2 id="testing-layers">Testing Layers</h2>
+<p>Divide your testing into three key levels to isolate failures, validate behavior, and guarantee end-to-end reliability.</p>
+<h3 id="1-unit-testing-lambda-logic">1. Unit Testing (Lambda Logic)</h3>
+<p><strong>Focus</strong>: Isolated validation of each Lambda function’s core logic.</p>
+<ul>
+<li>Mock input events to simulate API Gateway, SQS, or SNS payloads</li>
+<li>Validate return values, output formats, error handling, and conditional paths</li>
+<li>Does <strong>not</strong> require actual AWS infrastructure</li>
+</ul>
+<p><strong>Recommended Tools:</strong></p>
+<ul>
+<li>Node.js: Jest, Vitest, Mocha</li>
+<li>Go: built-in testing package (testing)</li>
+<li>AWS SDK mocks: (aws-sdk-client-mock) for JS, (gomock) for Go</li>
+</ul>
+<p><strong>Example (Node.js):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">handler</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./submitQuizEvent.js&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;submits a message&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">handler</span>({ <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">quiz_id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;q123&#34;</span> }) });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">statusCode</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span></code></pre></div><hr>
+<h3 id="2-integration-testing-service-to-service">2. Integration Testing (Service-to-Service)</h3>
+<p><strong>Focus</strong>: Validate communication between real AWS services such as Lambda, SQS, SNS, and S3.</p>
+<ul>
+<li>Deploy services using CDK, SAM, or manually</li>
+<li>Test message routing, retry policies, queue behavior, and permissions</li>
+<li>Confirm Lambda triggers work from S3 uploads, SNS fan-out, or SQS batching</li>
+</ul>
+<p><strong>Scenarios to Cover:</strong></p>
+<ul>
+<li>SNS → SQS → Lambda: Fan-out pattern</li>
+<li>S3 file upload triggers Lambda</li>
+<li>FIFO queue enforces strict order (MessageGroupId)</li>
+<li>DLQ catches messages after failed retries</li>
+</ul>
+<p><strong>How to Perform:</strong></p>
+<ul>
+<li>Use AWS Console or CLI to send messages or upload files</li>
+<li>Use CloudWatch Logs to trace Lambda behavior</li>
+<li>Simulate failures by throwing errors in Lambda code and observe DLQ behavior</li>
+</ul>
+<hr>
+<h3 id="3-end-to-end-testing-full-message-flow">3. End-to-End Testing (Full Message Flow)</h3>
+<p><strong>Focus</strong>: Simulate real user behavior and validate the entire event chain from request to processing.</p>
+<p><strong>Example Scenario:</strong></p>
+<ul>
+<li>User sends POST request to API Gateway</li>
+<li>Event is published to SNS</li>
+<li>Fan-out sends message to multiple SQS queues</li>
+<li>Each SQS queue triggers a consumer Lambda</li>
+<li>Consumers process events, or send failed ones to DLQ</li>
+</ul>
+<p><strong>Sample Test (curl):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST https://your-api-id.amazonaws.com/quiz-event <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{ &#34;quiz_id&#34;: &#34;q001&#34;, &#34;event&#34;: &#34;created&#34; }&#39;</span>
+</span></span></code></pre></div><hr>
+<h2 id="what-to-test">What to Test</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Test Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Functional</td>
+<td>Valid messages are parsed and processed correctly</td>
+</tr>
+<tr>
+<td>Error Handling</td>
+<td>Lambda throws → message ends up in DLQ</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>FIFO queue preserves message order</td>
+</tr>
+<tr>
+<td>Batching</td>
+<td>Lambda receives batch size of N from SQS</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>Logs, metrics, alarms reflect system state</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>Messages from DLQ can be manually replayed</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="tools-you-can-use">Tools You Can Use</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS Console</td>
+<td>Manual message injection and Lambda test runs</td>
+</tr>
+<tr>
+<td>AWS CLI / SDK</td>
+<td>Scripted testing and automation</td>
+</tr>
+<tr>
+<td>CloudWatch Logs</td>
+<td>Review logs, error stacks, execution traces</td>
+</tr>
+<tr>
+<td>CloudWatch Insights</td>
+<td>Structured queries across log streams</td>
+</tr>
+<tr>
+<td>Postman / curl</td>
+<td>Simulate API Gateway calls</td>
+</tr>
+<tr>
+<td>Unit test runners</td>
+<td>Isolate and validate core Lambda logic</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="optional-automate-your-tests">Optional: Automate Your Tests</h2>
+<p>Automation is useful for CI/CD pipelines, or scheduled validation in production-like environments.</p>
+<p><strong>Strategies:</strong></p>
+<ul>
+<li>Use GitHub Actions or AWS CodePipeline to deploy and run tests</li>
+<li>Use Python or Bash scripts to send synthetic events to SNS/SQS</li>
+<li>Schedule periodic Lambda tests using CloudWatch EventBridge Rules</li>
+<li>Automatically check DLQ queue length and publish alerts</li>
+</ul>
+<hr>
+<h2 id="success-criteria">Success Criteria</h2>
+<p>A well-tested event-driven system should meet the following:</p>
+<ul>
+<li>All Lambda functions return valid responses under expected load</li>
+<li>No unprocessed messages in DLQs under normal conditions</li>
+<li>FIFO queues maintain correct order with deduplication working</li>
+<li>Monitoring confirms event paths with visibility in CloudWatch Logs and Metrics</li>
+<li>Edge cases and failure scenarios are testable and recoverable</li>
+</ul>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>Testing event-driven systems involves multiple testing layers—from unit-level Lambda logic to end-to-end flows through SNS, SQS, and API Gateway. These tests ensure <strong>reliability</strong>, <strong>scalability</strong>, and <strong>operational clarity</strong>, especially when combined with logging, metrics, and alarms.</p>
+<p>Consistently validating your architecture under both normal and adverse conditions ensures that your application can withstand traffic spikes, input anomalies, and partial outages—all while providing a predictable and maintainable developer experience.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/9-optimizing-for-cost-and-performance/" title="Optimizing for Cost and Performance in Event Flows"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/1-creating-networking-resource-aws/" title="Tạo tài nguyên mạng AWS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1753537345"></script>
+    <script src="/js/perfect-scrollbar.min.js?1753537345"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1753537345"></script>
+    <script src="/js/jquery.sticky.js?1753537345"></script>
+    <script src="/js/featherlight.min.js?1753537345"></script>
+    <script src="/js/highlight.pack.js?1753537345"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1753537345"></script>
+    <script src="/js/learn.js?1753537345"></script>
+    <script src="/js/hugo-learn.js?1753537345"></script>
+
+    <link href="/mermaid/mermaid.css?1753537345" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1753537345"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.128.1">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Tạo các tài nguyên ở Private Middleware Subnet :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1753539323" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1753539323" rel="stylesheet">
+    <link href="/css/hybrid.css?1753539323" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1753539323" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1753539323" rel="stylesheet">
+    <link href="/css/auto-complete.css?1753539323" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1753539323" rel="stylesheet">
+    <link href="/css/theme.css?1753539323" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1753539323" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1753539323" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1753539323"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/4-creating-resources-at-pms/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1753539323"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1753539323"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1753539323"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-creating-networking-resource-aws/" title="Tạo tài nguyên mạng AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-creating-networking-resource-aws/">
+           <b> 1 </b> Tạo tài nguyên mạng AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-creating-first-applications-at-ps/" title="Xây dựng các ứng dụng đầu tiên ở Public Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-creating-first-applications-at-ps/">
+           <b> 2 </b> Xây dựng các ứng dụng đầu tiên ở Public Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-creating-database-at-pds/" title="Tạo các database ở Private Database Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-creating-database-at-pds/">
+           <b> 3 </b> Tạo các database ở Private Database Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-creating-resources-at-pms/" title="Tạo các tài nguyên ở Private Middleware Subnet" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/4-creating-resources-at-pms/">
+           <b> 4 </b> Tạo các tài nguyên ở Private Middleware Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-creating-resources-at-pas/" title="Tạo các tài nguyên ở Private Application Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-creating-resources-at-pas/">
+           <b> 5 </b> Tạo các tài nguyên ở Private Application Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-routing-api-with-kong-gateway/" title="Routing API với Kong Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-routing-api-with-kong-gateway/">
+           <b> 6 </b> Routing API với Kong Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-perform-apis-of-backend-applications/" title="Thực hiện các API của các ứng dụng Backend" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-perform-apis-of-backend-applications/">
+           <b> 7 </b> Thực hiện các API của các ứng dụng Backend
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-setting-up-monitoring-and-logging-with-cloudwatch/" title="Giám sát và khả năng quan sát với Amazon CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-setting-up-monitoring-and-logging-with-cloudwatch/">
+           <b> 8 </b> Giám sát và khả năng quan sát với Amazon CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-optimizing-for-cost-and-performance/" title="Tối ưu hóa chi phí và hiệu suất" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-optimizing-for-cost-and-performance/">
+           <b> 9 </b> Tối ưu hóa chi phí và hiệu suất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/4-creating-resources-at-pms/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Event-Driven Architecture with EC2, MSK, ElastiCache và RDS</a> > Tạo các tài nguyên ở Private Middleware Subnet
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tổng-quan">Tổng quan</a></li>
+        <li><a href="#định-nghĩa">Định nghĩa</a></li>
+        <li><a href="#tại-sao-ta-nên-sử-dụng-msk">Tại sao ta nên sử dụng MSK?</a></li>
+        <li><a href="#chỉnh-sửa-security-group-cho-các-tài-nguyên-trong-private-middleware-subnet">Chỉnh sửa Security group cho các tài nguyên trong Private Middleware Subnet</a></li>
+        <li><a href="#tạo-msk">Tạo MSK</a></li>
+        <li><a href="#tạo-elasticache">Tạo Elasticache</a></li>
+        <li><a href="#cài-đặt-debezium">Cài đặt Debezium</a></li>
+        <li><a href="#truy-cập-vào-msk">Truy cập vào MSK</a></li>
+        <li><a href="#tổng-kết">Tổng kết</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Tạo các tài nguyên ở Private Middleware Subnet
+            </h1>
+          
+
+        
+
+
+
+	<p><strong>Nội dung:</strong></p>
+<ul>
+<li><a href="/4-creating-resources-at-pms/#tổng-quan">Tổng quan</a></li>
+<li><a href="/4-creating-resources-at-pms/#định-nghĩa">Định nghĩa</a></li>
+<li><a href="/4-creating-resources-at-pms/#tại-sao-ta-nên-sử-dụng-msk">Tại sao ta nên sử dụng MSK?</a></li>
+<li><a href="/4-creating-resources-at-pms/#chỉnh-sửa-security-group-cho-các-tài-nguyên-trong-private-middleware-subnet">Chỉnh sửa Security group cho các tài nguyên trong Private Middleware Subnet</a></li>
+<li><a href="/4-creating-resources-at-pms/#tạo-msk">Tạo MSK</a></li>
+<li><a href="/4-creating-resources-at-pms/#tạo-rds-postgresql-replication">Tạo Elasticache</a></li>
+<li><a href="/4-creating-resources-at-pms/#chỉnh-sửa-security-group-của-cho-các-database-ở-private-database-subnet">Cài đặt Debezium</a></li>
+<li><a href="/4-creating-resources-at-pms/#truy-cập-vào-msk">Truy cập vào MSK</a></li>
+<li><a href="/4-creating-resources-at-pms/#-tổng-kết">Tổng kết</a></li>
+</ul>
+<h3 id="tổng-quan">Tổng quan</h3>
+<p>Trong bước này chúng ta sẽ tạo các tài nguyên và đặt chúng nằm ở <strong>Private Middleware Subnet</strong>. Và chúng ta có thể truy cập <strong>MSK</strong> thông qua <strong>Bastion host</strong>.</p>
+<hr>
+<h3 id="định-nghĩa">Định nghĩa</h3>
+<ul>
+<li><strong>Amazon ElastiCache</strong>: một dịch vụ caching (bộ nhớ đệm) được quản lý hoàn toàn (fully managed) trong AWS, giúp tạo, vận hành và mở rộng các kho lưu trữ dữ liệu trong bộ nhớ (in-memory data store) một cách dễ dàng và hiệu quả. Mục tiêu chính của nó là cải thiện hiệu suất ứng dụng bằng cách giảm tải cho cơ sở dữ liệu chính (database) và cung cấp khả năng truy xuất dữ liệu cực nhanh.</li>
+<li><strong>Amazon MSK (Managed Streaming for Apache Kafka)</strong>: dịch vụ quản lý hoàn toàn (fully managed) của AWS giúp bạn triển khai, vận hành và mở rộng các cluster Apache Kafka để xử lý dữ liệu streaming (luồng dữ liệu) thời gian thực mà không cần tự quản lý cơ sở hạ tầng phức tạp của Kafka.</li>
+<li><strong>Debezium</strong>: một công cụ nguồn mở (open-source) chuyên dụng cho Change Data Capture (CDC), giúp theo dõi và ghi lại mọi thay đổi dữ liệu (INSERT, UPDATE, DELETE) trong cơ sở dữ liệu quan hệ theo thời gian thực, sau đó phát chúng dưới dạng sự kiện (events) đến các hệ thống streaming như Apache Kafka.</li>
+</ul>
+<hr>
+<h3 id="tại-sao-ta-nên-sử-dụng-msk">Tại sao ta nên sử dụng MSK?</h3>
+<p>Việc triển khai Kafka trên AWS giúp chúng ta giải quyết được những vấn đề sau:</p>
+<ul>
+<li>Triển khai Kafka thủ công đòi hỏi kiến thức sâu, tốn công vận hành (cài đặt, cấu hình, giám sát, vá lỗi, scaling&hellip;). MSK tự động hóa các tác vụ này, giúp bạn tập trung vào xử lý dữ liệu thay vì quản lý hạ tầng.</li>
+<li><strong>Fully Managed</strong>: AWS tự động cài đặt, vá lỗi, backup, monitoring (qua CloudWatch), nâng cấp phiên bản Kafka.</li>
+<li><strong>High Availability</strong>: Triển khai Multi-AZ, tự động phục hồi node lỗi, đảm bảo độ tin cậy 99.9%.</li>
+<li><strong>Security</strong>: 	Hỗ trợ mã hóa dữ liệu (in-transit/at-rest), VPC, IAM, SSL/TLS, SASL/SCRAM.</li>
+<li><strong>Scalability</strong>: Thêm/bớt broker, thay đổi loại instance, tự động cân bằng tải (auto rebalance partitions).</li>
+<li><strong>Tương thích Kafka</strong>: 	Sử dụng client Kafka chuẩn, hỗ trợ Kafka Connect, MirrorMaker, Schema Registry.</li>
+<li><strong>Serverless Option (MSK Serverless)</strong>: Không cần quản lý capacity, tự động scale dựa trên lưu lượng, trả tiền theo sử dụng.</li>
+</ul>
+<h3 id="chỉnh-sửa-security-group-cho-các-tài-nguyên-trong-private-middleware-subnet">Chỉnh sửa Security group cho các tài nguyên trong Private Middleware Subnet</h3>
+<p><img alt="alt text" src="/4-creating-resources-at-pms/0-editing-sg-for-resource-in-private-middleware-subnet.png"></p>
+<p>Giải thích:</p>
+<ul>
+<li><strong>PORT 6379</strong>: Chúng ta sẽ cho phép <strong>Security group</strong> của các tài nguyên trong <strong>Private Application Subnet</strong> có thể kết nối tới <strong>Elasticache</strong> của chúng ta.</li>
+<li><strong>PORT 9092</strong>: Chúng ta sẽ cho phép <strong>Security group</strong> của các tài nguyên trong <strong>Private Application Subnet</strong>, <strong>Bastion host</strong> (để có thể thực hiện 1 số các vụ như xem Topic, tạo Topic,&hellip;), và cuối cùng là cho phép <strong>Debezium</strong> nằm trong cùng subnet có thể kết nối tới <strong>MSK</strong>.</li>
+</ul>
+<hr>
+<h3 id="tạo-msk">Tạo MSK</h3>
+<ol>
+<li>Đi vào <strong>Amazon MSK</strong> console.</li>
+<li>Nhấn vào <strong>Create MSK</strong>.</li>
+</ol>
+<p><strong>Bước 1</strong>
+<img alt="alt text" src="/4-creating-resources-at-pms/1-creating-msk.png">
+<strong>Bước 2</strong>
+<img alt="alt text" src="/4-creating-resources-at-pms/2-creating-msk.png">
+<strong>Bước 3</strong>
+<img alt="alt text" src="/4-creating-resources-at-pms/3-creating-msk.png"></p>
+<ol start="3">
+<li>2 bước còn lại thì để mặc định.</li>
+<li>Nhấn vào <strong>Create cluster</strong>.</li>
+</ol>
+<h3 id="tạo-elasticache">Tạo Elasticache</h3>
+<ol>
+<li>Đi vào <strong>Elasticache Dashboard</strong>.</li>
+<li>Chọn <strong>Redis OSS caches</strong> -&gt; <strong>Create cache</strong>.</li>
+<li>Chọn cấu hình như trong ảnh.</li>
+</ol>
+<p><img alt="alt text" src="/4-creating-resources-at-pms/4-creating-elasticache.png">
+<img alt="alt text" src="/4-creating-resources-at-pms/5-creating-elasticache.png">
+<img alt="alt text" src="/4-creating-resources-at-pms/6-creating-elasticache.png">
+<img alt="alt text" src="/4-creating-resources-at-pms/7-creating-elasticache.png">
+<img alt="alt text" src="/4-creating-resources-at-pms/8-creating-elasticache.png">
+<img alt="alt text" src="/4-creating-resources-at-pms/9-creating-elasticache.png"></p>
+<ol start="4">
+<li>Ở <strong>Step 2</strong> chúng ta sẽ để tất cả các tùy chọn mặc định và sẽ chọn <strong>Security Group</strong> giống như khi tạo <strong>MSK</strong>.</li>
+<li>Ở <strong>Step 3</strong> nhấn vào <strong>Create</strong>.</li>
+</ol>
+<h3 id="cài-đặt-debezium">Cài đặt Debezium</h3>
+<ol>
+<li>Đi vào <strong>EC2</strong> console.</li>
+<li>Nhấn vào <strong>Launch instance</strong>.</li>
+<li>Đặt tên (debezium).</li>
+<li>Chúng ta nên tạo Key pair (đặt tên là debezium).</li>
+<li>Chọn VPC (VPC mà chúng ta đã tạo ở bước trước).</li>
+<li>Đặt instance này ở private middleware subnet.</li>
+<li>Chọn <strong>Security Group</strong> cho <strong>Instance</strong> này giống như khi tạo <strong>Elasticache</strong>.</li>
+</ol>
+<p>Sau khi tạo xong <strong>EC2 Instance</strong> cho <strong>Debezium</strong> thì chúng ta sẽ SSH vào instance này thông qua <strong>Bastion host</strong> và thực hiện 1 số cài đặt.
+Sau khoảng 10-20 phút thì quá trình tạo <strong>MSK</strong> sẽ hoàn tất và chúng ta sẽ cần truy cập vào <strong>MSK</strong> để lấy thông tin về <strong>Bootstrap Server</strong> và trong hình ảnh thì ta sẽ lấy thông tin từ <strong>Private endpoint (single-VPC)</strong>.</p>
+<p><img alt="alt text" src="/4-creating-resources-at-pms/10-completed-msk-creation.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cập nhật hệ thống</span>
+</span></span><span style="display:flex;"><span>sudo dnf update -y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cài đặt Java 11 hoặc 17 (Debezium yêu cầu)</span>
+</span></span><span style="display:flex;"><span>sudo dnf install -y java-11-openjdk java-11-openjdk-devel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Kiểm tra Java version</span>
+</span></span><span style="display:flex;"><span>java -version
+</span></span></code></pre></div><p><strong>Tạo file docker-compose.yml</strong> bằng cú pháp <strong>nano docker-compose.yml</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;2&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">debezium</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">debezium/connect:2.6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">debezium</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8083:8083&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">BOOTSTRAP_SERVERS</span>: <span style="color:#ae81ff">&lt;YOUR_BOOTSTRAP_SERVERS&gt;      </span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">GROUP_ID</span>: <span style="color:#ae81ff">debezium-connect-cluster</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONFIG_STORAGE_TOPIC</span>: <span style="color:#ae81ff">debezium_connect_configs</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">OFFSET_STORAGE_TOPIC</span>: <span style="color:#ae81ff">debezium_connect_offsets</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">STATUS_STORAGE_TOPIC</span>: <span style="color:#ae81ff">debezium_connect_statuses</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KEY_CONVERTER</span>: <span style="color:#ae81ff">org.apache.kafka.connect.json.JsonConverter</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">VALUE_CONVERTER</span>: <span style="color:#ae81ff">org.apache.kafka.connect.json.JsonConverter</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">INTERNAL_KEY_CONVERTER</span>: <span style="color:#ae81ff">org.apache.kafka.connect.json.JsonConverter</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">INTERNAL_VALUE_CONVERTER</span>: <span style="color:#ae81ff">org.apache.kafka.connect.json.JsonConverter</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">PLUGIN_PATH</span>: <span style="color:#ae81ff">/kafka/connect,/debezium-plugins</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_REST_ADVERTISED_HOST_NAME</span>: <span style="color:#ae81ff">debezium</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_GROUP_ID</span>: <span style="color:#ae81ff">debezium-connect-cluster</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_STATUS_STORAGE_REPLICATION_FACTOR</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_PLUGIN_PATH</span>: <span style="color:#ae81ff">/kafka/connect,/debezium-plugins</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CONNECT_LOG4J_ROOT_LOGLEVEL</span>: <span style="color:#ae81ff">INFO</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/tmp/debezium-data:/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span></code></pre></div><p>Chúng ta sẽ thực hiện API này để đăng ký một Connector. Và chúng ta sẽ đăng kí các connector cho <strong>bmt_order</strong>, <strong>bmt_payment</strong> database. Và điều quan trọng là trọng là khi tạo database thì chúng ta phải chạy câu lệnh <strong>CREATE PUBLICATION order_dbz_publication FOR TABLE outboxes;</strong>. Và trong ứng dụng backend của tôi đã có script tự động tạo database và cũng có thực hiện câu lệnh <strong>CREATE PUBLICATION order_dbz_publication FOR TABLE outboxes;</strong>.</p>
+<p>Giải thích câu lệnh <strong>CREATE PUBLICATION order_dbz_publication FOR TABLE outboxes;</strong>:</p>
+<ul>
+<li><strong>CREATE PUBLICATION</strong>: Tạo một publication mới (một nhóm các bảng được theo dõi thay đổi).</li>
+<li><strong>order_dbz_publication</strong>: 	Tên của publication bạn tự đặt.</li>
+<li><strong>FOR TABLE outboxes</strong>: Chỉ định bảng outboxes sẽ được đưa vào publication (theo dõi thay đổi INSERT/UPDATE/DELETE).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8083/connectors <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;name&#34;: &#34;YOUR_CONNECTOR_NAME&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;config&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;connector.class&#34;: &#34;io.debezium.connector.postgresql.PostgresConnector&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.hostname&#34;: &#34;your-db-host&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.port&#34;: &#34;5432&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.user&#34;: &#34;youruser&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.password&#34;: &#34;yourpassword&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.dbname&#34;: &#34;yourdbname&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;database.server.name&#34;: &#34;pgserver1&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;plugin.name&#34;: &#34;pgoutput&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;slot.name&#34;: &#34;debezium&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;publication.name&#34;: &#34;debezium_pub&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;table.include.list&#34;: &#34;public.users&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;tombstones.on.delete&#34;: &#34;false&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span>
+</span></span></code></pre></div><p>Sau khi thực hiện API trên thì Debezium sẽ tự động tạo Kafka topic theo cú pháp: <strong>&lt;topic.prefix&gt;.&lt;schema&gt;.&lt;table&gt;</strong>
+. Và sau khi đăng kí các connectors thì chúng ta sẽ xem danh sách các connectors bằng câu lệnh <strong>curl http://localhost:8083/connectors</strong>.</p>
+<hr>
+<h3 id="truy-cập-vào-msk">Truy cập vào MSK</h3>
+<p>Để có thể truy cập vào <strong>MSK</strong> chúng ta nên truy cập thông qua <strong>Bastion host</strong>. Chúng ta sẽ SSH vào <strong>Bastion host</strong>. Và thực hiện câu lệnh bên dưới.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Tải Kafka 3.6.0 và giải nén nó ra thư mục hiện tại</span>
+</span></span><span style="display:flex;"><span>curl https://downloads.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz | tar -xz
+</span></span></code></pre></div><p>Và khi muốn truy cập vào <strong>MSK</strong> thì chúng ta cần phải thực hiện câu lệnh <strong>cd kafka_2.13-3.6.0</strong>. Để xem các <strong>Topic</strong> trong <strong>MSK</strong> thì chúng ta thực hiện câu lệnh <strong>bin/kafka-topics.sh &ndash;bootstrap-server &lt;YOUR_BOOTSTRAP_SERVER&gt;:9092 &ndash;list</strong>. Nếu không có <strong>Topic</strong> nào có dạng <strong>&lt;topic.prefix&gt;.&lt;schema&gt;.&lt;table&gt;</strong>. Lí do là <strong>MSK</strong> mặc định không tự tạo topic, nếu chúng ta không bật auto.create.topics.enable trên broker. Và chúng ta sẽ tạo thủ công với câu lệnh:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/kafka-topics.sh --create --bootstrap-server &lt;YOUR_BOOTSTRAP_SERVER&gt;:9092 --topic bmt_payment.public.outboxes --partitions <span style="color:#ae81ff">1</span> --replication-factor <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>Sau đó chúng ta sẽ kiểm tra lại và sẽ thấy các <strong>Topic</strong> với dạng <strong>&lt;topic.prefix&gt;.&lt;schema&gt;.&lt;table&gt;</strong>
+.</p>
+<hr>
+<h3 id="tổng-kết">Tổng kết</h3>
+<p>Trong bước này, chúng ta đã triển khai thành công các tài nguyên quan trọng nằm trong Private Middleware Subnet, bao gồm:</p>
+<ul>
+<li><strong>Amazon MSK (Managed Streaming for Apache Kafka)</strong>: Giải pháp xử lý dữ liệu dạng luồng (streaming) được quản lý hoàn toàn, giúp giảm tải việc vận hành hạ tầng Kafka thủ công.</li>
+<li><strong>Amazon ElastiCache (Redis)</strong>: Dịch vụ bộ nhớ đệm giúp tăng tốc độ truy xuất dữ liệu và giảm tải cho cơ sở dữ liệu chính.</li>
+<li><strong>Debezium</strong>: Công cụ CDC (Change Data Capture) giúp phát hiện và đẩy các thay đổi dữ liệu từ cơ sở dữ liệu PostgreSQL lên Kafka.</li>
+</ul>
+<p>Chúng ta cũng đã:</p>
+<ul>
+<li>Cấu hình lại các Security Group để đảm bảo các kết nối an toàn và hợp lý giữa các thành phần như application, middleware, bastion host và database.</li>
+<li>Tạo EC2 instance chạy Debezium trong private subnet, truy cập thông qua Bastion host để thực hiện cấu hình và kiểm tra.</li>
+<li>Cài đặt Kafka CLI để tương tác với MSK từ bastion host.</li>
+<li>Hiểu rõ rằng MSK không tự động tạo topic, và trong trường hợp cần thiết, chúng ta có thể tạo topic thủ công để phù hợp với luồng dữ liệu của Debezium.</li>
+</ul>
+<p>Toàn bộ bước này đặt nền tảng vững chắc để các dịch vụ trong private subnet có thể giao tiếp qua Kafka, caching qua Redis, và đảm bảo dữ liệu luôn được đồng bộ hóa theo thời gian thực nhờ Debezium.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/3-creating-database-at-pds/" title="Tạo các database ở Private Database Subnet"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/5-creating-resources-at-pas/" title="Tạo các tài nguyên ở Private Application Subnet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1753539323"></script>
+    <script src="/js/perfect-scrollbar.min.js?1753539323"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1753539323"></script>
+    <script src="/js/jquery.sticky.js?1753539323"></script>
+    <script src="/js/featherlight.min.js?1753539323"></script>
+    <script src="/js/highlight.pack.js?1753539323"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1753539323"></script>
+    <script src="/js/learn.js?1753539323"></script>
+    <script src="/js/hugo-learn.js?1753539323"></script>
+
+    <link href="/mermaid/mermaid.css?1753539323" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1753539323"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

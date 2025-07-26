@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.128.1">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Xây dựng các ứng dụng đầu tiên ở Public Subnet :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1753539323" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1753539323" rel="stylesheet">
+    <link href="/css/hybrid.css?1753539323" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1753539323" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1753539323" rel="stylesheet">
+    <link href="/css/auto-complete.css?1753539323" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1753539323" rel="stylesheet">
+    <link href="/css/theme.css?1753539323" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1753539323" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1753539323" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1753539323"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/2-creating-first-applications-at-ps/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1753539323"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1753539323"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1753539323"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-creating-networking-resource-aws/" title="Tạo tài nguyên mạng AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-creating-networking-resource-aws/">
+           <b> 1 </b> Tạo tài nguyên mạng AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-creating-first-applications-at-ps/" title="Xây dựng các ứng dụng đầu tiên ở Public Subnet" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/2-creating-first-applications-at-ps/">
+           <b> 2 </b> Xây dựng các ứng dụng đầu tiên ở Public Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-creating-database-at-pds/" title="Tạo các database ở Private Database Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-creating-database-at-pds/">
+           <b> 3 </b> Tạo các database ở Private Database Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-creating-resources-at-pms/" title="Tạo các tài nguyên ở Private Middleware Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-creating-resources-at-pms/">
+           <b> 4 </b> Tạo các tài nguyên ở Private Middleware Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-creating-resources-at-pas/" title="Tạo các tài nguyên ở Private Application Subnet" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-creating-resources-at-pas/">
+           <b> 5 </b> Tạo các tài nguyên ở Private Application Subnet
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-routing-api-with-kong-gateway/" title="Routing API với Kong Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-routing-api-with-kong-gateway/">
+           <b> 6 </b> Routing API với Kong Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-perform-apis-of-backend-applications/" title="Thực hiện các API của các ứng dụng Backend" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-perform-apis-of-backend-applications/">
+           <b> 7 </b> Thực hiện các API của các ứng dụng Backend
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-setting-up-monitoring-and-logging-with-cloudwatch/" title="Giám sát và khả năng quan sát với Amazon CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-setting-up-monitoring-and-logging-with-cloudwatch/">
+           <b> 8 </b> Giám sát và khả năng quan sát với Amazon CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-optimizing-for-cost-and-performance/" title="Tối ưu hóa chi phí và hiệu suất" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-optimizing-for-cost-and-performance/">
+           <b> 9 </b> Tối ưu hóa chi phí và hiệu suất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/2-creating-first-applications-at-ps/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Event-Driven Architecture with EC2, MSK, ElastiCache và RDS</a> > Xây dựng các ứng dụng đầu tiên ở Public Subnet
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tổng-quan">Tổng quan</a></li>
+        <li><a href="#định-nghĩa">Định nghĩa</a></li>
+        <li><a href="#tạo-kong-gateway">Tạo Kong gateway</a></li>
+        <li><a href="#giải-thích">Giải thích</a></li>
+        <li><a href="#tạo-bastionhost">Tạo Bastionhost</a></li>
+        <li><a href="#cài-đặt-kong-gateway">Cài đặt Kong gateway</a></li>
+        <li><a href="#tổng-kết">Tổng kết</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Xây dựng các ứng dụng đầu tiên ở Public Subnet
+            </h1>
+          
+
+        
+
+
+
+	<p><strong>Nội dung:</strong></p>
+<ul>
+<li><a href="/2-creating-first-applications-at-ps/#tổng-quan">Tổng quan</a></li>
+<li><a href="/2-creating-first-applications-at-ps/#định-nghĩa">Định nghĩa</a></li>
+<li><a href="/2-creating-first-applications-at-ps/#tạo-kong-gateway">Tạo Kong gateway</a></li>
+<li><a href="/2-creating-first-applications-at-ps/#tạo-bastionhost">Tạo Bastionhost</a></li>
+<li><a href="/2-creating-first-applications-at-ps/#cài-đặt-kong-gateway">Cài đặt Kong gateway</a></li>
+<li><a href="/2-creating-first-applications-at-ps/#-tổng-kết">Tổng kết</a></li>
+</ul>
+<hr>
+<h3 id="tổng-quan">Tổng quan</h3>
+<p>Trong bước này chúng ta sẽ xây dựng các ứng dụng ở <strong>Public Subnet</strong>:</p>
+<ul>
+<li><strong>Kong gateway</strong> (đây là cửa ngỏ để client giao tiếp với các ứng dụng ở private application subnet mà không giao tiếp trực tiếp với các ứng dụng ở private application subnet).</li>
+<li><strong>Bastion host</strong> (đây là 1 EC2 instance để chúng ta có thể truy cập gián tiếp vào các tài nguyên trong private subnets, vì các tài nguyên trong private subnets sẽ không có <strong>public ip</strong>, hay cũng sẽ có <strong>security group</strong> không cho truy cập từ bên ngoài vào).</li>
+</ul>
+<hr>
+<h3 id="định-nghĩa">Định nghĩa</h3>
+<ul>
+<li>
+<p><strong>Kong Gateway</strong>: là một thành phần trung gian nằm giữa client và các backend service, có vai trò như một &ldquo;cổng ra vào&rdquo; (gateway). Nó nhận request từ phía client, rồi định tuyến, xác thực, ghi log, và chuyển tiếp đến service nội bộ tương ứng.</p>
+</li>
+<li>
+<p><strong>Bastion host</strong>: là một EC2 instance đặc biệt, đóng vai trò như một cửa ngõ (gateway) để bạn có thể truy cập SSH vào các instance nằm trong private subnet – những máy mà không có IP public và không thể truy cập trực tiếp từ Internet.</p>
+</li>
+</ul>
+<hr>
+<h3 id="tạo-kong-gateway">Tạo Kong gateway</h3>
+<ol>
+<li>Đi vào <strong>EC2</strong> console.</li>
+<li>Nhấn vào <strong>Launch instance</strong>.</li>
+<li>Đặt tên (kong_gateway).</li>
+<li>Chúng ta nên tạo Key pair (đặt tên là kong_gateway).</li>
+<li>Chọn VPC (VPC mà chúng ta đã tạo ở bước trước).</li>
+<li>Đặt instance này ở public subnet.</li>
+<li>Tạo mới <strong>Sercurity group</strong> mới (đăt tên là kong_gateway_sg) và chúng ta nên sửa đổi <strong>Sercurity group</strong> này như trong ảnh. Tôi khuyên bạn nên chỉ cho phép cổng 8001 được truy cập bởi 1 số ip nhất định.</li>
+</ol>
+<p><img alt="alt text" src="/2-creating-first-applications-at-ps/1-editing-kong-gateway-sg.png"></p>
+<ol start="8">
+<li>Và cuối cùng là nhấn Launch instance.</li>
+</ol>
+<h3 id="giải-thích">Giải thích</h3>
+<ul>
+<li><strong>Cổng 8000</strong>: Đây là cổng chính mà client (người dùng cuối hoặc ứng dụng bên ngoài) sử dụng để gửi các yêu cầu đến các dịch vụ backend trong private application subnet.</li>
+<li><strong>Cổng 8001</strong>: Đây là cổng cho phép bạn quản lý cấu hình của Kong, như thêm/xoá/định nghĩa các route, service, plugin&hellip;</li>
+</ul>
+<hr>
+<h3 id="tạo-bastionhost">Tạo Bastionhost</h3>
+<ol>
+<li>Đi vào <strong>EC2</strong> console.</li>
+<li>Nhấn vào <strong>Launch instance</strong>.</li>
+<li>Đặt tên (bastion_host).</li>
+<li>Chúng ta nên tạo Key pair (đặt tên là bastion_host).</li>
+<li>Chọn VPC (VPC mà chúng ta đã tạo ở bước trước).</li>
+<li>Đặt instance này ở public subnet.</li>
+<li>Tạo mới <strong>Sercurity group</strong> mới (đăt tên là bastion_host_sg) và chúng ta chỉ mở cổng 22 để chúng ta có thể SSH vào instance này. Và cũng giống như <strong>kong_gateway</strong> thì ta cũng nên để cổng 22 được truy cập bởi 1 số ip nhất định.</li>
+<li>Và cuối cùng là nhấn Launch instance.</li>
+</ol>
+<hr>
+<h3 id="cài-đặt-kong-gateway">Cài đặt Kong gateway</h3>
+<ol>
+<li>SSH vào EC2 có tên là kong_gateway.</li>
+<li>Cài đặt Docker.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cập nhật hệ thống</span>
+</span></span><span style="display:flex;"><span>sudo dnf update -y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cài đặt Docker</span>
+</span></span><span style="display:flex;"><span>sudo dnf install docker -y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Khởi động Docker service</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start docker
+</span></span><span style="display:flex;"><span>sudo systemctl enable docker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Thêm user vào docker group</span>
+</span></span><span style="display:flex;"><span>sudo usermod -a -G docker ec2-user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Logout và login lại để áp dụng thay đổi group</span>
+</span></span><span style="display:flex;"><span>exit
+</span></span></code></pre></div><ol start="3">
+<li>Cài đặt Docker Compose.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cài đặt Docker Compose</span>
+</span></span><span style="display:flex;"><span>sudo curl -L <span style="color:#e6db74">&#34;https://github.com/docker/compose/releases/latest/download/docker-compose-</span><span style="color:#66d9ef">$(</span>uname -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">-</span><span style="color:#66d9ef">$(</span>uname -m<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> -o /usr/local/bin/docker-compose
+</span></span><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/docker-compose
+</span></span></code></pre></div><ol start="4">
+<li>Tạo file docker-compose bằng câu lệnh <strong>nano docker-compose.yml</strong>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.8&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># PostgreSQL Database cho Kong</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kong-database</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:13</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">kong-database</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_USER</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_PASSWORD</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_DB</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;5432:5432&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong_data:/var/lib/postgresql/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong-net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Kong Database Migration</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kong-migration</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kong/kong-gateway:3.4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">kong-migration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: <span style="color:#e6db74">&#34;kong migrations bootstrap&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_DATABASE</span>: <span style="color:#ae81ff">postgres</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_HOST</span>: <span style="color:#ae81ff">kong-database</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_USER</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_PASSWORD</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_DATABASE</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong-database</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong-net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#66d9ef">on</span>-<span style="color:#ae81ff">failure</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Kong Gateway</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kong</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kong/kong-gateway:3.4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">kong-gateway</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_DATABASE</span>: <span style="color:#ae81ff">postgres</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_HOST</span>: <span style="color:#ae81ff">kong-database</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_USER</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_PASSWORD</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PG_DATABASE</span>: <span style="color:#ae81ff">kong</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PROXY_ACCESS_LOG</span>: <span style="color:#ae81ff">/dev/stdout</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_ADMIN_ACCESS_LOG</span>: <span style="color:#ae81ff">/dev/stdout</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_PROXY_ERROR_LOG</span>: <span style="color:#ae81ff">/dev/stderr</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_ADMIN_ERROR_LOG</span>: <span style="color:#ae81ff">/dev/stderr</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_ADMIN_LISTEN</span>: <span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">8001</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KONG_ADMIN_GUI_URL</span>: <span style="color:#ae81ff">http://localhost:8002</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8000:8000&#34;</span>   <span style="color:#75715e"># Proxy port HTTP</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8001:8001&#34;</span>   <span style="color:#75715e"># Admin API port</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8443:8443&#34;</span>   <span style="color:#75715e"># Proxy port HTTPS</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8444:8444&#34;</span>   <span style="color:#75715e"># Admin API HTTPS port</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8002:8002&#34;</span>   <span style="color:#75715e"># Kong Manager (GUI)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong-migration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kong-net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kong_data</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kong-net</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">bridge</span>
+</span></span></code></pre></div><ol start="5">
+<li>Khởi động Kong gateway</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Khởi động các container</span>
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Kiểm tra trạng thái containers</span>
+</span></span><span style="display:flex;"><span>docker-compose ps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Xem logs nếu cần</span>
+</span></span><span style="display:flex;"><span>docker-compose logs kong
+</span></span></code></pre></div><ol start="6">
+<li>Xác nhận cài đặt</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Kiểm tra Kong Admin API</span>
+</span></span><span style="display:flex;"><span>curl -i http://localhost:8001/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Kiểm tra Kong Proxy</span>
+</span></span><span style="display:flex;"><span>curl -i http://localhost:8000/
+</span></span></code></pre></div><hr>
+<h3 id="tổng-kết">Tổng kết</h3>
+<p>Trong bước này, chúng ta đã thiết lập được hai thành phần quan trọng trong Public Subnet của kiến trúc mạng AWS:</p>
+<ul>
+<li>
+<p><strong>Kong Gateway</strong>: đóng vai trò như một API Gateway, giúp quản lý và định tuyến các request từ client tới các dịch vụ backend nằm trong Private Subnet một cách an toàn và linh hoạt. Việc cài đặt Kong bằng Docker và Docker Compose giúp quá trình triển khai dễ dàng, nhanh chóng và có thể tái sử dụng.</p>
+</li>
+<li>
+<p><strong>Bastion Host</strong>: cho phép chúng ta truy cập các EC2 instance trong Private Subnet thông qua SSH một cách gián tiếp, đảm bảo nguyên tắc zero trust trong bảo mật mạng.</p>
+</li>
+</ul>
+<p>Việc cấu hình đúng Security Group, Subnet, và hiểu vai trò từng thành phần là điều then chốt giúp hệ thống của bạn vừa bảo mật vừa dễ dàng mở rộng trong tương lai.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/1-creating-networking-resource-aws/" title="Tạo tài nguyên mạng AWS"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/3-creating-database-at-pds/" title="Tạo các database ở Private Database Subnet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1753539323"></script>
+    <script src="/js/perfect-scrollbar.min.js?1753539323"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1753539323"></script>
+    <script src="/js/jquery.sticky.js?1753539323"></script>
+    <script src="/js/featherlight.min.js?1753539323"></script>
+    <script src="/js/highlight.pack.js?1753539323"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1753539323"></script>
+    <script src="/js/learn.js?1753539323"></script>
+    <script src="/js/hugo-learn.js?1753539323"></script>
+
+    <link href="/mermaid/mermaid.css?1753539323" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1753539323"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
